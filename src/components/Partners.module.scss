@@ -1,0 +1,89 @@
+@use 'abstracts' as *;
+
+.section {
+  padding-block: fluid(64, 112) fluid(40, 64);
+}
+
+.inner {
+  @include container;
+}
+
+.grid {
+  display: grid;
+  gap: space(5);
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.card {
+  @include card(space(6));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: space(8);
+  min-height: 13rem;
+}
+
+.head {
+  display: grid;
+  gap: space(1);
+}
+
+.ticker {
+  font-family: var(--font-display);
+  font-size: fluid(28, 36);
+  line-height: 1.1;
+  color: c('gold');
+}
+
+.meta {
+  font-size: 0.875rem;
+  color: c('text-subtle');
+}
+
+.invite {
+  justify-content: flex-start;
+  gap: space(3);
+  background: transparent;
+  border: 1.5px dashed rgb(232 199 122 / 0.45);
+}
+
+.plus {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: space(2);
+  border-radius: 50%;
+  border: 1px solid rgb(232 199 122 / 0.45);
+  color: c('gold');
+}
+
+.inviteTitle {
+  font-size: 1.25rem;
+}
+
+.inviteBody {
+  color: c('text-muted');
+  font-size: 0.9375rem;
+}
+
+.inviteLink {
+  display: inline-flex;
+  align-items: center;
+  gap: space(2);
+  margin-top: auto;
+  font-weight: 700;
+  text-decoration: none;
+
+  svg {
+    transition: translate 0.2s $ease-out;
+  }
+
+  @include hover {
+    svg {
+      translate: 4px 0;
+    }
+  }
+}

@@ -1,0 +1,130 @@
+@use 'abstracts' as *;
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  padding-block: fluid(48, 112) fluid(64, 120);
+
+  // Brand geometric lines + soft gold light
+  &::before {
+    content: '';
+    position: absolute;
+    inset: calc(var(--header-h) * -1) 0 0;
+    z-index: -1;
+    background:
+      radial-gradient(60rem 30rem at 85% 10%, rgb(232 199 122 / 0.1), transparent 60%),
+      linear-gradient(115deg, transparent 49.9%, rgb(232 199 122 / 0.07) 50%, transparent 50.1%),
+      linear-gradient(28deg, transparent 49.9%, rgb(159 176 192 / 0.08) 50%, transparent 50.1%),
+      linear-gradient(160deg, transparent 49.9%, rgb(159 176 192 / 0.06) 50%, transparent 50.1%);
+    mask-image: linear-gradient(to bottom, #000 70%, transparent);
+  }
+}
+
+.inner {
+  @include container;
+  display: grid;
+  gap: fluid(48, 64);
+  align-items: center;
+
+  @include up('lg') {
+    grid-template-columns: 1.15fr 1fr;
+  }
+}
+
+.copy {
+  min-width: 0;
+}
+
+.eyebrow {
+  @include eyebrow;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: space(3);
+  font-size: 0.75rem;
+}
+
+.pulse {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: c('gold');
+  box-shadow: 0 0 0 0 rgb(232 199 122 / 0.6);
+
+  @include motion-ok {
+    animation: pulse 2s infinite;
+  }
+}
+
+.title {
+  @include display(48, 88);
+  margin-top: space(5);
+  line-height: 0.98;
+}
+
+.accent {
+  background: linear-gradient(100deg, c('gold-deep'), c('gold-strong') 45%, c('gold'));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lede {
+  margin-top: space(6);
+  max-width: 34rem;
+  font-size: fluid(17, 20);
+  color: c('text-muted');
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: space(3);
+  margin-top: space(10);
+
+  @include down('sm') {
+    > * {
+      flex: 1 1 100%;
+    }
+  }
+}
+
+.micro {
+  margin-top: space(4);
+  font-size: 0.8125rem;
+  color: c('text-subtle');
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: space(2) space(6);
+  margin-top: space(6);
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+  color: c('text-subtle');
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: space(2);
+
+    &::before {
+      content: '';
+      width: 0.375rem;
+      height: 0.375rem;
+      rotate: 45deg;
+      background: c('gold');
+    }
+  }
+}
+
+@keyframes pulse {
+  70% {
+    box-shadow: 0 0 0 0.6rem rgb(232 199 122 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(232 199 122 / 0);
+  }
+}

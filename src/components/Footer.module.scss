@@ -1,0 +1,65 @@
+@use 'abstracts' as *;
+
+.footer {
+  border-top: 1px solid c('line');
+  background: c('bg-deep');
+}
+
+.inner {
+  @include container;
+  display: grid;
+  gap: space(8);
+  padding-block: space(12);
+
+  @include up('md') {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: space(3);
+}
+
+.logo {
+  border-radius: radius('sm');
+  object-fit: cover;
+}
+
+.name {
+  font-weight: 700;
+}
+
+.tag {
+  font-size: 0.875rem;
+  color: c('text-subtle');
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: space(2) space(6);
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: inline-block;
+    padding-block: space(2);
+    color: c('text-muted');
+    text-decoration: none;
+
+    @include hover {
+      color: c('gold');
+    }
+  }
+}
+
+.legal {
+  grid-column: 1 / -1;
+  padding-top: space(6);
+  border-top: 1px solid c('line');
+  font-size: 0.8125rem;
+  color: c('text-subtle');
+}

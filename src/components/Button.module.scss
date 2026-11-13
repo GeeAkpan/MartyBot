@@ -1,0 +1,73 @@
+@use 'abstracts' as *;
+
+.btn {
+  --_bg: #{c('gold')};
+  --_fg: #{c('on-gold')};
+  --_bd: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: space(2);
+  min-height: 2.75rem;
+  padding-inline: space(5);
+  border: 1.5px solid var(--_bd);
+  border-radius: radius('md');
+  background: var(--_bg);
+  color: var(--_fg);
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1.25;
+  text-wrap: balance;
+  padding-block: space(2);
+  max-width: 100%;
+  transition:
+    background 0.2s ease,
+    translate 0.2s $ease-out,
+    box-shadow 0.2s ease;
+
+  @include hover {
+    translate: 0 -2px;
+  }
+
+  &:active {
+    translate: 0 0;
+  }
+}
+
+.primary {
+  box-shadow: 0 0.5rem 1.5rem -0.5rem rgb(232 199 122 / 0.45);
+
+  @include hover {
+    --_bg: #{c('gold-strong')};
+    box-shadow: 0 0.75rem 2rem -0.5rem rgb(232 199 122 / 0.6);
+  }
+}
+
+.ghost {
+  --_bg: transparent;
+  --_fg: #{c('text')};
+  --_bd: rgb(232 199 122 / 0.5);
+
+  @include hover {
+    --_bd: #{c('gold')};
+    --_bg: rgb(232 199 122 / 0.08);
+  }
+}
+
+.dark {
+  --_bg: #{c('bg')};
+  --_fg: #{c('gold')};
+
+  @include hover {
+    --_bg: #{c('bg-deep')};
+  }
+}
+
+.lg {
+  min-height: 3.5rem;
+  padding-inline: space(8);
+  font-size: 1.0625rem;
+  border-radius: radius('md');
+}

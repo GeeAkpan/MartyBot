@@ -1,0 +1,26 @@
+@use 'abstracts' as *;
+
+.head {
+  display: grid;
+  gap: space(4);
+  max-width: 44rem;
+  margin-bottom: fluid(32, 56);
+}
+
+.center {
+  margin-inline: auto;
+  text-align: center;
+  justify-items: center;
+}
+
+.eyebrow {
+  @include eyebrow;
+}
+
+.title {
+  @include display(34, 56);
+}
+
+.accent {
+  color: c('gold');
+}

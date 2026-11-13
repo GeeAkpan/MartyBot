@@ -1,0 +1,86 @@
+@use 'abstracts' as *;
+
+.band {
+  border-block: 1px solid c('line');
+  background: rgb(19 41 58 / 0.55);
+}
+
+.inner {
+  @include container;
+  display: grid;
+  gap: space(4);
+  align-items: center;
+  padding-block: space(6);
+
+  @include up('md') {
+    grid-template-columns: auto 1fr;
+    gap: space(10);
+  }
+}
+
+.label {
+  @include eyebrow;
+}
+
+.viewport {
+  min-width: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+
+  @include motion-ok {
+    animation: scroll 32s linear infinite;
+  }
+
+  &:hover {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    width: auto;
+
+    .row {
+      flex-wrap: wrap;
+      padding: 0;
+    }
+
+    .row + .row {
+      display: none;
+    }
+  }
+}
+
+.row {
+  display: flex;
+  gap: space(3);
+  padding: 0 space(3) 0 0;
+  list-style: none;
+}
+
+%pill {
+  padding: space(2) space(5);
+  border-radius: radius('pill');
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.chip {
+  @extend %pill;
+  border: 1px solid c('line-strong');
+}
+
+.placeholder {
+  @extend %pill;
+  border: 1px dashed rgb(232 199 122 / 0.6);
+  color: c('gold');
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}

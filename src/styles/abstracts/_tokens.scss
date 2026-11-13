@@ -1,0 +1,73 @@
+// ---------------------------------------------------------------
+// Design tokens: the single source of truth for the Marty brand.
+// Exposed to the browser as CSS custom properties in base/_root.scss
+// ---------------------------------------------------------------
+@use 'sass:map';
+
+$colors: (
+  'bg': #0b1c2a,
+  'bg-deep': #07131d,
+  'surface': #13293a,
+  'surface-2': #183247,
+  'gold': #e8c77a,
+  'gold-strong': #f2d796,
+  'gold-deep': #c9a24f,
+  'cream': #f5ecd7,
+  'text': #f5ecd7,
+  'text-muted': #c9d4de,
+  'text-subtle': #9fb0c0,
+  'line': rgb(245 236 215 / 0.1),
+  'line-strong': rgb(245 236 215 / 0.18),
+  'on-gold': #0b1c2a,
+);
+
+$fonts: (
+  'display': ('Russo One', 'Arial Black', system-ui, sans-serif),
+  'body': ('Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif),
+);
+
+// Spacing scale (4px base)
+$space: (
+  '1': 0.25rem,
+  '2': 0.5rem,
+  '3': 0.75rem,
+  '4': 1rem,
+  '5': 1.25rem,
+  '6': 1.5rem,
+  '8': 2rem,
+  '10': 2.5rem,
+  '12': 3rem,
+  '16': 4rem,
+  '20': 5rem,
+  '24': 6rem,
+);
+
+$radii: (
+  'sm': 0.625rem,
+  'md': 0.875rem,
+  'lg': 1.375rem,
+  'xl': 1.75rem,
+  'pill': 999px,
+);
+
+$breakpoints: (
+  'sm': 36rem,
+  'md': 48rem,
+  'lg': 64rem,
+  'xl': 80rem,
+);
+
+$container: 75rem;
+$ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+@function c($key) {
+  @return var(--c-#{$key});
+}
+
+@function space($key) {
+  @return map.get($space, '#{$key}');
+}
+
+@function radius($key) {
+  @return map.get($radii, $key);
+}

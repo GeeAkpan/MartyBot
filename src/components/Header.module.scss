@@ -1,0 +1,185 @@
+@use 'abstracts' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-h);
+  isolation: isolate;
+
+  // The blur lives on a pseudo-element: a backdrop-filter on the header itself
+  // would become the containing block for the fixed mobile menu and trap it.
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-bottom: 1px solid transparent;
+    transition:
+      background 0.3s ease,
+      border-color 0.3s ease;
+  }
+}
+
+.scrolled::before {
+  background: rgb(11 28 42 / 0.82);
+  border-color: c('line');
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+}
+
+.inner {
+  @include container;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: space(4);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: space(3);
+  min-width: 0;
+  color: c('text');
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: fluid(17, 20);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.logo {
+  flex-shrink: 0;
+  border-radius: radius('sm');
+  border: 1.5px solid c('gold');
+  object-fit: cover;
+}
+
+// ---- Desktop nav --------------------------------------------------
+.nav {
+  display: flex;
+  align-items: center;
+  gap: fluid(20, 32, 1024, 1440);
+
+  @include down('lg') {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    height: calc(100dvh - var(--header-h));
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: space(6);
+    padding: space(6) space(6) max(space(8), env(safe-area-inset-bottom));
+    background: c('bg');
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    visibility: hidden;
+    opacity: 0;
+    translate: 0 -0.5rem;
+    transition:
+      opacity 0.2s ease,
+      translate 0.2s $ease-out,
+      visibility 0s 0.2s;
+  }
+}
+
+.navOpen {
+  @include down('lg') {
+    visibility: visible;
+    opacity: 1;
+    translate: 0 0;
+    transition:
+      opacity 0.2s ease,
+      translate 0.2s $ease-out;
+  }
+}
+
+.list {
+  display: flex;
+  gap: fluid(16, 26, 1024, 1440);
+  list-style: none;
+  padding: 0;
+
+  @include down('lg') {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.link {
+  position: relative;
+  color: c('text-muted');
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+
+  @include hover {
+    color: c('text');
+  }
+
+  &[aria-current='true'] {
+    color: c('gold');
+  }
+
+  @include up('lg') {
+    padding-block: space(2);
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: c('gold');
+      scale: 0 1;
+      transition: scale 0.25s $ease-out;
+    }
+
+    &[aria-current='true']::after {
+      scale: 1 1;
+    }
+  }
+
+  @include down('lg') {
+    display: flex;
+    align-items: center;
+    min-height: 3.5rem;
+    border-bottom: 1px solid c('line');
+    font-size: 1.25rem;
+    color: c('text');
+  }
+}
+
+.cta {
+  flex-shrink: 0;
+
+  @include down('lg') {
+    min-height: 3.25rem;
+  }
+}
+
+.toggle {
+  display: none;
+  flex-shrink: 0;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid c('line-strong');
+  border-radius: radius('sm');
+  background: transparent;
+  color: c('text');
+  cursor: pointer;
+
+  @include down('lg') {
+    display: grid;
+  }
+}

@@ -1,0 +1,77 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'tokens' as *;
+
+// Mobile-first media query: @include up('md') { ... }
+@mixin up($bp) {
+  @media (min-width: map.get($breakpoints, $bp)) {
+    @content;
+  }
+}
+
+@mixin down($bp) {
+  @media (max-width: calc(#{map.get($breakpoints, $bp)} - 0.02rem)) {
+    @content;
+  }
+}
+
+// Fluid value between two viewport widths (in px), returned as clamp().
+@function fluid($min-px, $max-px, $min-vw: 360, $max-vw: 1280) {
+  $slope: math.div($max-px - $min-px, $max-vw - $min-vw);
+  $intercept: $min-px - $slope * $min-vw;
+  @return clamp(
+    #{math.div($min-px, 16)}rem,
+    #{math.div($intercept, 16)}rem + #{$slope * 100}vw,
+    #{math.div($max-px, 16)}rem
+  );
+}
+
+@mixin container {
+  width: min(100% - 2 * #{space(6)}, #{$container});
+  margin-inline: auto;
+}
+
+@mixin display($min, $max) {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: fluid($min, $max);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+@mixin eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: c('gold');
+}
+
+@mixin card($pad: space(8)) {
+  background: c('surface');
+  border: 1px solid c('line');
+  border-radius: radius('lg');
+  padding: $pad;
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid c('gold');
+    outline-offset: 3px;
+  }
+}
+
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin motion-ok {
+  @media (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}

@@ -1,0 +1,79 @@
+@use 'abstracts' as *;
+
+.section {
+  padding-block: fluid(64, 112) fluid(40, 64);
+}
+
+.inner {
+  @include container;
+  max-width: 52rem;
+}
+
+.list {
+  display: grid;
+  gap: space(3);
+}
+
+.item {
+  border: 1px solid c('line');
+  border-radius: radius('lg');
+  background: c('surface');
+  transition: border-color 0.25s ease;
+}
+
+.open {
+  border-color: rgb(232 199 122 / 0.4);
+
+  .chev {
+    rotate: 45deg;
+    color: c('gold');
+  }
+
+  .panel {
+    grid-template-rows: 1fr;
+  }
+}
+
+.q {
+  font-size: inherit;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: space(4);
+  width: 100%;
+  min-height: 3.75rem;
+  padding: space(4) space(6);
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  color: c('text');
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.chev {
+  flex-shrink: 0;
+  color: c('text-subtle');
+  transition: rotate 0.3s $ease-out, color 0.2s ease;
+}
+
+// Animate height with grid rows (no JS measuring)
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s $ease-out;
+}
+
+.panelInner {
+  overflow: hidden;
+
+  p {
+    padding: 0 space(6) space(5);
+    color: c('text-muted');
+  }
+}

@@ -1,0 +1,99 @@
+@use 'abstracts' as *;
+
+.section {
+  padding-block: fluid(64, 112) fluid(40, 64);
+}
+
+.inner {
+  @include container;
+}
+
+.panel {
+  position: relative;
+  display: grid;
+  gap: fluid(32, 56);
+  align-items: center;
+  padding: fluid(28, 64);
+  border-radius: radius('xl');
+  border: 1px solid rgb(232 199 122 / 0.35);
+  background:
+    radial-gradient(40rem 22rem at 0% 100%, rgb(232 199 122 / 0.14), transparent 70%),
+    c('surface');
+  overflow: hidden;
+
+  @include up('lg') {
+    grid-template-columns: 1.2fr 1fr;
+  }
+
+  // Large hexagon outline, echoing the lion badge
+  &::after {
+    content: '';
+    position: absolute;
+    right: -6rem;
+    top: -6rem;
+    width: 22rem;
+    aspect-ratio: 1;
+    clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+    background: rgb(232 199 122 / 0.05);
+    pointer-events: none;
+  }
+}
+
+.eyebrow {
+  @include eyebrow;
+}
+
+.title {
+  @include display(56, 96);
+  margin-top: space(3);
+  color: c('gold');
+}
+
+.body {
+  margin-top: space(5);
+  max-width: 34rem;
+  font-size: fluid(16, 18);
+  color: c('text-muted');
+}
+
+.facts {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  border: 1px solid c('line');
+  border-radius: radius('lg');
+  background: rgb(11 28 42 / 0.6);
+}
+
+.fact {
+  display: grid;
+  gap: space(1);
+  padding: space(5) space(6);
+
+  & + & {
+    border-top: 1px solid c('line');
+  }
+
+  dt {
+    font-size: 0.8125rem;
+    color: c('text-subtle');
+  }
+
+  dd {
+    margin: 0;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+}
+
+.compact {
+  @include up('lg') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.follow {
+  display: inline-block;
+  margin-top: space(5);
+  font-weight: 700;
+}

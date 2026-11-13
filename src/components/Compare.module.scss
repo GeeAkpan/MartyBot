@@ -1,0 +1,113 @@
+@use 'abstracts' as *;
+
+.section {
+  padding-block: fluid(72, 120) fluid(24, 40);
+}
+
+.inner {
+  @include container;
+}
+
+.grid {
+  display: grid;
+  gap: space(5);
+
+  @include up('md') {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.col {
+  @include card(fluid(24, 36));
+  display: flex;
+  flex-direction: column;
+  gap: space(5);
+  min-width: 0;
+}
+
+.old {
+  background: rgb(19 41 58 / 0.45);
+
+  .list li {
+    color: c('text-subtle');
+  }
+}
+
+.new {
+  border-color: rgb(232 199 122 / 0.45);
+  background:
+    radial-gradient(30rem 18rem at 100% 0%, rgb(232 199 122 / 0.14), transparent 70%),
+    c('surface');
+}
+
+.colHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: space(3);
+
+  h3 {
+    font-size: fluid(20, 24);
+  }
+}
+
+.count {
+  padding: space(1) space(3);
+  border: 1px solid c('line-strong');
+  border-radius: radius('pill');
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: c('text-subtle');
+}
+
+.countGold {
+  border-color: c('gold');
+  background: c('gold');
+  color: c('on-gold');
+}
+
+.list {
+  display: grid;
+  gap: space(3);
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: space(3);
+    line-height: 1.5;
+  }
+}
+
+%dot {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.05rem;
+  border-radius: 50%;
+}
+
+.x {
+  @extend %dot;
+  background: rgb(255 138 122 / 0.12);
+  color: #ff8a7a;
+}
+
+.tick {
+  @extend %dot;
+  background: c('gold');
+  color: c('on-gold');
+}
+
+.cta {
+  align-self: flex-start;
+  margin-top: auto;
+
+  @include down('sm') {
+    align-self: stretch;
+  }
+}

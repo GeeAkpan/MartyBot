@@ -1,0 +1,80 @@
+@use 'abstracts' as *;
+
+.section {
+  padding-block: fluid(64, 112) fluid(40, 64);
+}
+
+.inner {
+  @include container;
+}
+
+// Bento grid: 2 wide + 2 narrow tiles on a 3-column grid
+.bento {
+  display: grid;
+  gap: space(5);
+  padding: 0;
+  list-style: none;
+
+  @include up('md') {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.tile {
+  @include card(fluid(24, 36));
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: space(2);
+  min-height: 15rem;
+  overflow: hidden;
+  background:
+    radial-gradient(28rem 16rem at 100% 0%, rgb(232 199 122 / 0.1), transparent 70%),
+    c('surface');
+  transition: border-color 0.3s ease;
+
+  @include hover {
+    border-color: rgb(232 199 122 / 0.4);
+
+    .icon {
+      rotate: -6deg;
+      scale: 1.06;
+    }
+  }
+}
+
+.wide {
+  @include up('md') {
+    grid-column: span 2;
+  }
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: auto;
+  border-radius: radius('md');
+  background: rgb(232 199 122 / 0.12);
+  border: 1px solid rgb(232 199 122 / 0.3);
+  color: c('gold');
+  transition: rotate 0.3s $ease-out, scale 0.3s $ease-out;
+}
+
+.kicker {
+  margin-top: space(8);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: c('gold');
+}
+
+.title {
+  font-size: fluid(22, 28);
+  line-height: 1.2;
+}
+
+.body {
+  max-width: 32rem;
+  color: c('text-muted');
+}
