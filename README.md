@@ -27,7 +27,7 @@ Anything in `[BRACKETS]` is a placeholder. **Placeholders are hidden on the live
 - fees, wallet export, $MARS details (chain, contract, where to buy)
 - docs, community and partner-contact links
 - confirm the X handle (`@matarabot`)
-- if you add a custom domain, update the URLs in `index.html`, `public/robots.txt` and `public/sitemap.xml`
+- if you add a custom domain, update the URLs (currently https://martybot-ashen.vercel.app) in `index.html`, `public/robots.txt` and `public/sitemap.xml`
 
 ## "Try Marty" playground (`#try`)
 
